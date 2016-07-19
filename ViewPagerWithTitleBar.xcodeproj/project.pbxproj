@@ -14,6 +14,14 @@
 		13017C471D3ED8AE001648A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13017C451D3ED8AE001648A6 /* LaunchScreen.storyboard */; };
 		13017C521D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C511D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift */; };
 		13017C5D1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C5C1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift */; };
+		13017C721D3ED914001648A6 /* DCHUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C6A1D3ED914001648A6 /* DCHUtils.swift */; };
+		13017C731D3ED914001648A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C6B1D3ED914001648A6 /* MainViewController.swift */; };
+		13017C741D3ED914001648A6 /* PageAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C6C1D3ED914001648A6 /* PageAViewController.swift */; };
+		13017C801D3ED974001648A6 /* PagesBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13017C7B1D3ED974001648A6 /* PagesBar.storyboard */; };
+		13017C811D3ED974001648A6 /* PagesBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7C1D3ED974001648A6 /* PagesBarController.swift */; };
+		13017C821D3ED974001648A6 /* PagesBarPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */; };
+		13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */; };
+		13017C841D3ED974001648A6 /* UICalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7F1D3ED974001648A6 /* UICalculations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +55,14 @@
 		13017C581D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewPagerWithTitleBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13017C5C1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerWithTitleBarUITests.swift; sourceTree = "<group>"; };
 		13017C5E1D3ED8AE001648A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13017C6A1D3ED914001648A6 /* DCHUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCHUtils.swift; sourceTree = "<group>"; };
+		13017C6B1D3ED914001648A6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		13017C6C1D3ED914001648A6 /* PageAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAViewController.swift; sourceTree = "<group>"; };
+		13017C7B1D3ED974001648A6 /* PagesBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagesBar.storyboard; sourceTree = "<group>"; };
+		13017C7C1D3ED974001648A6 /* PagesBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarController.swift; sourceTree = "<group>"; };
+		13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarPagesController.swift; sourceTree = "<group>"; };
+		13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarPresenter.swift; sourceTree = "<group>"; };
+		13017C7F1D3ED974001648A6 /* UICalculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICalculations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +113,10 @@
 		13017C3B1D3ED8AE001648A6 /* ViewPagerWithTitleBar */ = {
 			isa = PBXGroup;
 			children = (
+				13017C7A1D3ED974001648A6 /* PagesBar */,
+				13017C6A1D3ED914001648A6 /* DCHUtils.swift */,
+				13017C6B1D3ED914001648A6 /* MainViewController.swift */,
+				13017C6C1D3ED914001648A6 /* PageAViewController.swift */,
 				13017C3C1D3ED8AE001648A6 /* AppDelegate.swift */,
 				13017C3E1D3ED8AE001648A6 /* ViewController.swift */,
 				13017C401D3ED8AE001648A6 /* Main.storyboard */,
@@ -123,6 +143,18 @@
 				13017C5E1D3ED8AE001648A6 /* Info.plist */,
 			);
 			path = ViewPagerWithTitleBarUITests;
+			sourceTree = "<group>";
+		};
+		13017C7A1D3ED974001648A6 /* PagesBar */ = {
+			isa = PBXGroup;
+			children = (
+				13017C7B1D3ED974001648A6 /* PagesBar.storyboard */,
+				13017C7C1D3ED974001648A6 /* PagesBarController.swift */,
+				13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */,
+				13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */,
+				13017C7F1D3ED974001648A6 /* UICalculations.swift */,
+			);
+			path = PagesBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +264,7 @@
 				13017C471D3ED8AE001648A6 /* LaunchScreen.storyboard in Resources */,
 				13017C441D3ED8AE001648A6 /* Assets.xcassets in Resources */,
 				13017C421D3ED8AE001648A6 /* Main.storyboard in Resources */,
+				13017C801D3ED974001648A6 /* PagesBar.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +289,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13017C721D3ED914001648A6 /* DCHUtils.swift in Sources */,
 				13017C3F1D3ED8AE001648A6 /* ViewController.swift in Sources */,
+				13017C841D3ED974001648A6 /* UICalculations.swift in Sources */,
+				13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */,
+				13017C741D3ED914001648A6 /* PageAViewController.swift in Sources */,
 				13017C3D1D3ED8AE001648A6 /* AppDelegate.swift in Sources */,
+				13017C731D3ED914001648A6 /* MainViewController.swift in Sources */,
+				13017C811D3ED974001648A6 /* PagesBarController.swift in Sources */,
+				13017C821D3ED974001648A6 /* PagesBarPagesController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +524,7 @@
 				13017C631D3ED8AE001648A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		13017C641D3ED8AE001648A6 /* Build configuration list for PBXNativeTarget "ViewPagerWithTitleBarTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +533,7 @@
 				13017C661D3ED8AE001648A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		13017C671D3ED8AE001648A6 /* Build configuration list for PBXNativeTarget "ViewPagerWithTitleBarUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +542,7 @@
 				13017C691D3ED8AE001648A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

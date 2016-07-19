@@ -1,8 +1,6 @@
 //
 //  AppDelegate.swift
-//  ViewPagerWithTitleBar
 //
-//  Created by DHope on 19/07/2016.
 //  Copyright © 2016 David Hope. All rights reserved.
 //
 
