@@ -1,6 +1,8 @@
 //
 //  PagesBarController.swift
 //
+//  Provides the public interface. See the presenter and view for the logic internals
+//
 //  Copyright © 2016 David Hope. All rights reserved.
 //
 
@@ -20,7 +22,7 @@ public struct PagesBarConfig {
     var textWidth:  CGFloat = 0
     var textHeight: CGFloat = 0
     var textColor:  UIColor = UIColor.blackColor()
-    var selectedColor:  UIColor = UIColor.blackColor() // TODO use this
+    var selectedTextColor:  UIColor = UIColor.blueColor() // TODO use this
     var textFont:   UIFont  = UIFont(name: "HelveticaNeue", size: 18.0)!
     
     var barBackgroundColor: UIColor = UIColor.whiteColor()
@@ -33,12 +35,6 @@ public protocol PagesBarEvents {
 
 public class PagesBarController: UIViewController {
     
-    public var pagesBarConfig: PagesBarConfig?
-    public var pagesBarEvents: PagesBarEvents? {
-        get {return presenter?.pagesBarEvents}
-        set(pagesBarEvents) {presenter?.pagesBarEvents = pagesBarEvents}
-    }
-    
     @IBOutlet internal weak var labelsScrollView: UIScrollView!
     internal var barSelector: UIView!
     internal var labels: [UILabel] = []
@@ -49,6 +45,21 @@ public class PagesBarController: UIViewController {
     
     var calculatedLayoutInfo: CalculatedLayoutInfo!
     internal var isRotating = false
+    
+    public var pagesBarConfig: PagesBarConfig?
+    
+    public var currentlySelectedIndex: Int { get {
+        return presenter!.selectedIndex
+    }}
+    
+    public func selectPageAtIndex(index: Int) {
+        presenter!.onSelectIndex(index)
+    }
+    
+    public var pagesBarEvents: PagesBarEvents? {
+        get {return presenter?.pagesBarEvents}
+        set(pagesBarEvents) {presenter?.pagesBarEvents = pagesBarEvents}
+    }
     
     public static func createPagesBarController() -> PagesBarController {
         let pagesBarController = UIStoryboard(name: "PagesBar", bundle: nil).instantiateViewControllerWithIdentifier("PagesBarController")
@@ -75,11 +86,6 @@ public class PagesBarController: UIViewController {
     // rotations and when setViewControllers is called (via adding subviews)
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        // now we can layout the subview with our dimensions decided
-        pagesBarView!.calculateAllDimensions()
-        pagesBarView!.layoutTitles()
-        pagesBarView!.layoutPages()
         presenter?.onLayoutDone()
     }
     
@@ -130,101 +136,9 @@ public class PagesBarController: UIViewController {
     internal func produceLabel(title: String) -> UILabel {
         let label = UILabel()
         label.text = title
-        label.textAlignment = .Center
-        label.textColor = pagesBarConfig?.textColor
-        label.font = pagesBarConfig?.textFont
         return label
     }
     
-}
-
-
-// This could live in the controller but kept separated here for clarity
-// Note its only internally accessible
-class PagesBarView: ViewContract {
-    
-    weak var pagesBarCtl: PagesBarController!
-    weak var calculatedLayoutInfo: CalculatedLayoutInfo!
-    
-    init(barController: PagesBarController) {
-        self.pagesBarCtl = barController
-        calculatedLayoutInfo = pagesBarCtl.calculatedLayoutInfo
-    }
-    
-    func addTitle(title: String, index: Int) {
-        let label = pagesBarCtl.produceLabel(title)
-        pagesBarCtl.labelsScrollView.addSubview(label)
-        pagesBarCtl.addClickEventToLabel(label)
-        pagesBarCtl.labels.insert(label, atIndex: index)
-    }
-    
-    func addPage(page: UIViewController, index: Int) {
-        pagesBarCtl.pagesViewController.addViewController(page, index: index)
-    }
-    
-    func clearTitles() {
-        for label in pagesBarCtl.labels {
-            label.removeFromSuperview()
-        }
-        pagesBarCtl.labels.removeAll()
-    }
-    
-    func clearPages() {
-        pagesBarCtl.pagesViewController.clearControllers()
-    }
-    
-    func layoutTitles() {
-        for (index, label) in pagesBarCtl.labels.enumerate() {
-            label.frame = calculatedLayoutInfo.labelLayoutInfo.itemsFrames[index]
-        }
-        pagesBarCtl.labelsScrollView.contentSize = CGSizeMake(calculatedLayoutInfo.labelLayoutInfo.scrollWidth, 0)
-    }
-    
-    func layoutPages() {
-        pagesBarCtl.pagesViewController.layout()
-    }
-    
-    func calculateAllDimensions() {
-        let count = pagesBarCtl.presenter!.numberOfItems
-        if (count == 0) {return}
-        pagesBarCtl.pagesBarConfig?.singlePageBounds = pagesBarCtl.pagesViewController.view.bounds
-        pagesBarCtl.pagesBarConfig?.numOfItems = count
-        calculatedLayoutInfo.updateAll(pagesBarCtl.pagesBarConfig!)
-    }
-    
-    func getInstantaneousPagePosition() -> Int {
-        let offset = pagesBarCtl.pagesViewController.pageScrollView.contentOffset.x
-        let calcIndex = calculatedLayoutInfo.calcIndexFromPagePosition(offset)
-        return calcIndex
-    }
-    
-    func isLabelVisible(index: Int) -> Bool {
-        let selLabelFrame = pagesBarCtl.labels[index].frame
-        let visibleRect = pagesBarCtl.labelsScrollView.bounds
-        return calculatedLayoutInfo.rectContainsLabelFrame(selLabelFrame, visibleRect: visibleRect)
-    }
-    
-    func moveToPosition(index: Int, inTime: Double) {
-        UIView.animateWithDuration(inTime, animations: {
-            self.pagesBarCtl.pagesViewController.currentIndex = index
-            self.pagesBarCtl.setSelectorPosition(index)
-            self.pagesBarCtl.pagesViewController.moveToPosition()
-        })
-    }
-    
-    func moveBarForOffset(offset: CGFloat) {
-        pagesBarCtl.barSelector.center = calculatedLayoutInfo.calculateDynamicSelectorPosition(offset)
-    }
-    
-    func scrollTitleBarTo(index: Int, inTime: Double) {
-        let selLabelFrame = pagesBarCtl.labels[index].frame
-        let visibleRect = pagesBarCtl.labelsScrollView.bounds
-        let newX = calculatedLayoutInfo.calculateNewLabelsScrollViewPosition(selLabelFrame, visibleRect: visibleRect, scrollViewXOffset: pagesBarCtl.labelsScrollView.contentOffset.x)
-        
-        UIView.animateWithDuration(inTime, animations: {
-            self.pagesBarCtl.labelsScrollView.contentOffset = CGPointMake(newX, 0)
-        })
-    }
 }
 
 

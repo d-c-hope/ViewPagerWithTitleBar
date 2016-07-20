@@ -24,6 +24,7 @@ protocol ViewContract {
     func isLabelVisible(index: Int) -> Bool
     func layoutTitles()
     func layoutPages()
+    func setColorsAndFonts(selectedIndex: Int)
     
     func moveToPosition(index: Int, inTime: Double)
     func moveBarForOffset(offset: CGFloat)
@@ -95,6 +96,10 @@ class PagesBarPresenter : PresenterContract {
     }
     
     func onLayoutDone() {
+        // now we can layout the subview with our dimensions decided
+        view.calculateAllDimensions()
+        view.layoutTitles()
+        view.layoutPages()
         view.moveToPosition(selectedIndex, inTime: 0)
         scrollTitleBarIfNeeded(selectedIndex)
     }
@@ -104,6 +109,7 @@ class PagesBarPresenter : PresenterContract {
         let calcIndex = view.getInstantaneousPagePosition()
         
         view.moveBarForOffset(offset)
+        view.setColorsAndFonts(calcIndex)
         
         if ( (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) ) {
             selectedIndex = calcIndex

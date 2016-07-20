@@ -22,6 +22,7 @@
 		13017C821D3ED974001648A6 /* PagesBarPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */; };
 		13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */; };
 		13017C841D3ED974001648A6 /* UICalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7F1D3ED974001648A6 /* UICalculations.swift */; };
+		13017C861D400D96001648A6 /* PagesBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C851D400D96001648A6 /* PagesBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarPagesController.swift; sourceTree = "<group>"; };
 		13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarPresenter.swift; sourceTree = "<group>"; };
 		13017C7F1D3ED974001648A6 /* UICalculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICalculations.swift; sourceTree = "<group>"; };
+		13017C851D400D96001648A6 /* PagesBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				13017C7D1D3ED974001648A6 /* PagesBarPagesController.swift */,
 				13017C7E1D3ED974001648A6 /* PagesBarPresenter.swift */,
 				13017C7F1D3ED974001648A6 /* UICalculations.swift */,
+				13017C851D400D96001648A6 /* PagesBarView.swift */,
 			);
 			path = PagesBar;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				13017C841D3ED974001648A6 /* UICalculations.swift in Sources */,
 				13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */,
 				13017C741D3ED914001648A6 /* PageAViewController.swift in Sources */,
+				13017C861D400D96001648A6 /* PagesBarView.swift in Sources */,
 				13017C3D1D3ED8AE001648A6 /* AppDelegate.swift in Sources */,
 				13017C731D3ED914001648A6 /* MainViewController.swift in Sources */,
 				13017C811D3ED974001648A6 /* PagesBarController.swift in Sources */,

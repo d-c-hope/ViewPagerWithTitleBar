@@ -138,22 +138,33 @@ class CalculatedLayoutInfo {
         else { return false }
     }
     
-    // Calculates an offset for the scrollview containing labels to ensure selected label visibility
-    func calculateNewLabelsScrollViewPosition(selLabelFrame: CGRect, visibleRect: CGRect,
-                                              scrollViewXOffset: CGFloat) -> CGFloat {
-        // TODO improve this to make absolute - can be off if the user manually scrolls first
-        var newX = scrollViewXOffset
+    // Calculates an offset for the scrollview containing labels to ensure selected label is visible
+    func calculateNewLabelsScrollViewPosition(selLabelIndex: Int, visibleRect: CGRect) -> CGFloat {
         
-        let labelsGap = labelLayoutInfo.centresGap
-        if (selLabelFrame.minX < visibleRect.minX) {
-            newX = scrollViewXOffset - labelsGap
+        let selLabelFrame = self.labelLayoutInfo.itemsFrames[selLabelIndex]
+        var leftMostVisibleRect = CGRectMake(0, visibleRect.minY, visibleRect.width, visibleRect.height)
+        let labelsSpacing = labelLayoutInfo.centresGap
+        
+        func getOffsetRect(i: Int, letMostVisibleRect: CGRect) -> CGRect {
+            let offset = CGFloat(i)*labelsSpacing
+            return letMostVisibleRect.offsetBy(dx: offset, dy: 0)
         }
-        else {
-            newX = scrollViewXOffset + labelsGap
+        
+        var visibleOffsets = [CGFloat]()
+        for (i, _) in self.labelLayoutInfo.itemsFrames.enumerate() {
+            let newVisibleRect = getOffsetRect(i, letMostVisibleRect: leftMostVisibleRect)
+            if rectContainsLabelFrame(selLabelFrame, visibleRect: newVisibleRect) {
+                visibleOffsets.append(newVisibleRect.minX)
+            }
         }
-        return newX
+        
+        if selLabelFrame.minX < visibleRect.minX {
+            return visibleOffsets.last!
+        } else {
+            return visibleOffsets.first!
+        }
     }
-    
+
 }
 
 
