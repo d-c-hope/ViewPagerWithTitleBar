@@ -8,14 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		13017C3D1D3ED8AE001648A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C3C1D3ED8AE001648A6 /* AppDelegate.swift */; };
-		13017C3F1D3ED8AE001648A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C3E1D3ED8AE001648A6 /* ViewController.swift */; };
 		13017C421D3ED8AE001648A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13017C401D3ED8AE001648A6 /* Main.storyboard */; };
 		13017C441D3ED8AE001648A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13017C431D3ED8AE001648A6 /* Assets.xcassets */; };
 		13017C471D3ED8AE001648A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13017C451D3ED8AE001648A6 /* LaunchScreen.storyboard */; };
 		13017C521D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C511D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift */; };
 		13017C5D1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C5C1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift */; };
-		13017C731D3ED914001648A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C6B1D3ED914001648A6 /* MainViewController.swift */; };
-		13017C741D3ED914001648A6 /* PageAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C6C1D3ED914001648A6 /* PageAViewController.swift */; };
 		13017C801D3ED974001648A6 /* PagesBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13017C7B1D3ED974001648A6 /* PagesBar.storyboard */; };
 		13017C811D3ED974001648A6 /* PagesBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7C1D3ED974001648A6 /* PagesBarController.swift */; };
 		13017C821D3ED974001648A6 /* PagesSubsectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7D1D3ED974001648A6 /* PagesSubsectionController.swift */; };
@@ -23,6 +20,9 @@
 		13017C841D3ED974001648A6 /* UICalculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C7F1D3ED974001648A6 /* UICalculations.swift */; };
 		13017C861D400D96001648A6 /* PagesBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C851D400D96001648A6 /* PagesBarView.swift */; };
 		13017C891D40153D001648A6 /* DCHUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C881D40153D001648A6 /* DCHUtils.swift */; };
+		13017C8D1D40160B001648A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8A1D40160B001648A6 /* MainViewController.swift */; };
+		13017C8E1D40160B001648A6 /* PageAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8B1D40160B001648A6 /* PageAViewController.swift */; };
+		13017C8F1D40160B001648A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8C1D40160B001648A6 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +45,6 @@
 /* Begin PBXFileReference section */
 		13017C391D3ED8AE001648A6 /* ViewPagerWithTitleBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewPagerWithTitleBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13017C3C1D3ED8AE001648A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		13017C3E1D3ED8AE001648A6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		13017C411D3ED8AE001648A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		13017C431D3ED8AE001648A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13017C461D3ED8AE001648A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,8 +55,6 @@
 		13017C581D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewPagerWithTitleBarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13017C5C1D3ED8AE001648A6 /* ViewPagerWithTitleBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPagerWithTitleBarUITests.swift; sourceTree = "<group>"; };
 		13017C5E1D3ED8AE001648A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		13017C6B1D3ED914001648A6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		13017C6C1D3ED914001648A6 /* PageAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageAViewController.swift; path = ../PageAViewController.swift; sourceTree = "<group>"; };
 		13017C7B1D3ED974001648A6 /* PagesBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PagesBar.storyboard; sourceTree = "<group>"; };
 		13017C7C1D3ED974001648A6 /* PagesBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarController.swift; sourceTree = "<group>"; };
 		13017C7D1D3ED974001648A6 /* PagesSubsectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesSubsectionController.swift; sourceTree = "<group>"; };
@@ -65,6 +62,9 @@
 		13017C7F1D3ED974001648A6 /* UICalculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICalculations.swift; sourceTree = "<group>"; };
 		13017C851D400D96001648A6 /* PagesBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesBarView.swift; sourceTree = "<group>"; };
 		13017C881D40153D001648A6 /* DCHUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCHUtils.swift; sourceTree = "<group>"; };
+		13017C8A1D40160B001648A6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		13017C8B1D40160B001648A6 /* PageAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAViewController.swift; sourceTree = "<group>"; };
+		13017C8C1D40160B001648A6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,9 +117,7 @@
 			children = (
 				13017C871D40153D001648A6 /* Example */,
 				13017C7A1D3ED974001648A6 /* PagesBar */,
-				13017C6B1D3ED914001648A6 /* MainViewController.swift */,
 				13017C3C1D3ED8AE001648A6 /* AppDelegate.swift */,
-				13017C3E1D3ED8AE001648A6 /* ViewController.swift */,
 				13017C401D3ED8AE001648A6 /* Main.storyboard */,
 				13017C431D3ED8AE001648A6 /* Assets.xcassets */,
 				13017C451D3ED8AE001648A6 /* LaunchScreen.storyboard */,
@@ -162,7 +160,9 @@
 		13017C871D40153D001648A6 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				13017C6C1D3ED914001648A6 /* PageAViewController.swift */,
+				13017C8A1D40160B001648A6 /* MainViewController.swift */,
+				13017C8B1D40160B001648A6 /* PageAViewController.swift */,
+				13017C8C1D40160B001648A6 /* ViewController.swift */,
 				13017C881D40153D001648A6 /* DCHUtils.swift */,
 			);
 			path = Example;
@@ -300,14 +300,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13017C3F1D3ED8AE001648A6 /* ViewController.swift in Sources */,
+				13017C8D1D40160B001648A6 /* MainViewController.swift in Sources */,
 				13017C841D3ED974001648A6 /* UICalculations.swift in Sources */,
 				13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */,
 				13017C891D40153D001648A6 /* DCHUtils.swift in Sources */,
-				13017C741D3ED914001648A6 /* PageAViewController.swift in Sources */,
+				13017C8E1D40160B001648A6 /* PageAViewController.swift in Sources */,
 				13017C861D400D96001648A6 /* PagesBarView.swift in Sources */,
+				13017C8F1D40160B001648A6 /* ViewController.swift in Sources */,
 				13017C3D1D3ED8AE001648A6 /* AppDelegate.swift in Sources */,
-				13017C731D3ED914001648A6 /* MainViewController.swift in Sources */,
 				13017C811D3ED974001648A6 /* PagesBarController.swift in Sources */,
 				13017C821D3ED974001648A6 /* PagesSubsectionController.swift in Sources */,
 			);

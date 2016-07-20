@@ -96,6 +96,7 @@ class PagesBarPresenter : PresenterContract {
     }
     
     func onLayoutDone() {
+        if controllersAndLabels.count == 0 {return}
         // now we can layout the subview with our dimensions decided
         view.calculateAllDimensions()
         view.layoutTitles()
@@ -112,8 +113,8 @@ class PagesBarPresenter : PresenterContract {
         view.setColorsAndFonts(calcIndex)
         
         if ( (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) ) {
-            selectedIndex = calcIndex
             scrollTitleBarIfNeeded(calcIndex, inTime:0.2)
+            selectedIndex = calcIndex
             pagesBarEvents?.onPageChanged(selectedIndex)
         }
     }

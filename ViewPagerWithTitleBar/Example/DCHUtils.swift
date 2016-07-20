@@ -11,7 +11,20 @@ import UIKit
 class DCHUtils {
     
     
+    func makeControllers0() -> [(String, UIViewController)] {
+        let controllers :[(String, UIViewController)] =
+            []
+        return controllers
+    }
+    
     func makeControllers1() -> [(String, UIViewController)] {
+        let controllers :[(String, UIViewController)] =
+            [("TitleA", newColoredViewController("A"))
+        ]
+        return controllers
+    }
+    
+    func makeControllers3() -> [(String, UIViewController)] {
         let controllers :[(String, UIViewController)] =
             [("TitleA", newColoredViewController("A")),
              ("TitleB" , newColoredViewController("B")),
@@ -20,8 +33,7 @@ class DCHUtils {
         return controllers
     }
     
-    
-    func makeControllers2() -> [(String, UIViewController)] {
+    func makeControllers5() -> [(String, UIViewController)] {
         let controllers :[(String, UIViewController)] =
             [("TitleA", newColoredViewController("A")),
              ("TitleB" , newColoredViewController("B")),
