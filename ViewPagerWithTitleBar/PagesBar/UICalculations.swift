@@ -58,7 +58,7 @@ class CalculatedLayoutInfo {
     func calculatePagesLayoutInfo() {
         var layoutInfo = PagesLayoutInfo()
         layoutInfo.boundsWidth = pagerConstants.singlePageBounds.size.width
-        layoutInfo.boundsHeight = pagerConstants.singlePageBounds.size.width
+        layoutInfo.boundsHeight = pagerConstants.singlePageBounds.size.height
         
         self.pagesLayoutInfo = layoutInfo
     }

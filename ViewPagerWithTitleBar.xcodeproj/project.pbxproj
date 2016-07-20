@@ -23,6 +23,7 @@
 		13017C8D1D40160B001648A6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8A1D40160B001648A6 /* MainViewController.swift */; };
 		13017C8E1D40160B001648A6 /* PageAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8B1D40160B001648A6 /* PageAViewController.swift */; };
 		13017C8F1D40160B001648A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8C1D40160B001648A6 /* ViewController.swift */; };
+		13017C911D401BEF001648A6 /* UICalculationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C901D401BEF001648A6 /* UICalculationsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		13017C8A1D40160B001648A6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		13017C8B1D40160B001648A6 /* PageAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAViewController.swift; sourceTree = "<group>"; };
 		13017C8C1D40160B001648A6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		13017C901D401BEF001648A6 /* UICalculationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICalculationsTests.swift; path = PagesBar/UICalculationsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		13017C501D3ED8AE001648A6 /* ViewPagerWithTitleBarTests */ = {
 			isa = PBXGroup;
 			children = (
+				13017C921D401C41001648A6 /* PagesBar */,
 				13017C511D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift */,
 				13017C531D3ED8AE001648A6 /* Info.plist */,
 			);
@@ -166,6 +169,14 @@
 				13017C881D40153D001648A6 /* DCHUtils.swift */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		13017C921D401C41001648A6 /* PagesBar */ = {
+			isa = PBXGroup;
+			children = (
+				13017C901D401BEF001648A6 /* UICalculationsTests.swift */,
+			);
+			name = PagesBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13017C521D3ED8AE001648A6 /* ViewPagerWithTitleBarTests.swift in Sources */,
+				13017C911D401BEF001648A6 /* UICalculationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
