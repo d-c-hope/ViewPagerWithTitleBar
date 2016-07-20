@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="17" y="-188"/>
         </scene>
-        <!--Pages Bar Pages Controller-->
+        <!--Pages Subsection Controller-->
         <scene sceneID="bnF-ys-1ou">
             <objects>
-                <viewController id="lws-rf-SU9" customClass="PagesBarPagesController" customModule="ViewPagerWithTitleBar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lws-rf-SU9" customClass="PagesSubsectionController" customModule="ViewPagerWithTitleBar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JfA-RT-V55"/>
                         <viewControllerLayoutGuide type="bottom" id="Nkg-Rm-0oD"/>

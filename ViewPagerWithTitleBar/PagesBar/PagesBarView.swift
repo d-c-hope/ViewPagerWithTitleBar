@@ -29,7 +29,7 @@ class PagesBarView: ViewContract {
     }
     
     func addPage(page: UIViewController, index: Int) {
-        pagesBarCtl.pagesViewController.addViewController(page, index: index)
+        pagesBarCtl.pagesSubsectionController.addViewController(page, index: index)
     }
     
     func clearTitles() {
@@ -40,7 +40,7 @@ class PagesBarView: ViewContract {
     }
     
     func clearPages() {
-        pagesBarCtl.pagesViewController.clearControllers()
+        pagesBarCtl.pagesSubsectionController.clearControllers()
     }
     
     func layoutTitles() {
@@ -51,19 +51,19 @@ class PagesBarView: ViewContract {
     }
     
     func layoutPages() {
-        pagesBarCtl.pagesViewController.layout()
+        pagesBarCtl.pagesSubsectionController.layout()
     }
     
     func calculateAllDimensions() {
         let count = pagesBarCtl.presenter!.numberOfItems
         if (count == 0) {return}
-        pagesBarCtl.pagesBarConfig?.singlePageBounds = pagesBarCtl.pagesViewController.view.bounds
+        pagesBarCtl.pagesBarConfig?.singlePageBounds = pagesBarCtl.pagesSubsectionController.view.bounds
         pagesBarCtl.pagesBarConfig?.numOfItems = count
         calculatedLayoutInfo.updateAll(pagesBarCtl.pagesBarConfig!)
     }
     
     func getInstantaneousPagePosition() -> Int {
-        let offset = pagesBarCtl.pagesViewController.pageScrollView.contentOffset.x
+        let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
         let calcIndex = calculatedLayoutInfo.calcIndexFromPagePosition(offset)
         return calcIndex
     }
@@ -76,9 +76,9 @@ class PagesBarView: ViewContract {
     
     func moveToPosition(index: Int, inTime: Double) {
         UIView.animateWithDuration(inTime, animations: {
-            self.pagesBarCtl.pagesViewController.currentIndex = index
+            self.pagesBarCtl.pagesSubsectionController.currentIndex = index
             self.pagesBarCtl.setSelectorPosition(index)
-            self.pagesBarCtl.pagesViewController.moveToPosition()
+            self.pagesBarCtl.pagesSubsectionController.moveToPosition()
             self.setColorsAndFonts(index)
         })
     }

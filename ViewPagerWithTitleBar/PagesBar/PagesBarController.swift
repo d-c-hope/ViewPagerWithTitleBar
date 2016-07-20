@@ -38,7 +38,7 @@ public class PagesBarController: UIViewController {
     @IBOutlet internal weak var labelsScrollView: UIScrollView!
     internal var barSelector: UIView!
     internal var labels: [UILabel] = []
-    internal var pagesViewController: PagesBarPagesController!
+    internal var pagesSubsectionController: PagesSubsectionController!
     
     internal var presenter: PagesBarPresenter? = nil
     internal var pagesBarView: PagesBarView? = nil
@@ -95,12 +95,14 @@ public class PagesBarController: UIViewController {
     
     // Obtain the embedded controller
     override public func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? PagesBarPagesController
+        if let vc = segue.destinationViewController as? PagesSubsectionController
             where segue.identifier == "SectionBarPagesEmbedSegue" {
             
-            self.pagesViewController = vc
-            self.pagesViewController.offsetHasChanged = { (offset: CGFloat) in
-                self.presenter?.onPageScrolled(offset)
+            self.pagesSubsectionController = vc
+            self.pagesSubsectionController.offsetHasChanged = { (offset: CGFloat) in
+                if (!self.isRotating) {
+                    self.presenter?.onPageScrolled(offset)
+                }
             }
         }
     }

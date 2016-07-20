@@ -1,5 +1,5 @@
 //
-//  PagesBarViewController.swift
+//  PagesSubsectionController.swift
 //
 //  Copyright © 2016 David Hope. All rights reserved.
 //
@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // The pages that site beneath the title bar
-class PagesBarPagesController: UIViewController, UIScrollViewDelegate {
+class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var pageScrollView: UIScrollView!
     @IBOutlet weak var pageContainer: UIView!
