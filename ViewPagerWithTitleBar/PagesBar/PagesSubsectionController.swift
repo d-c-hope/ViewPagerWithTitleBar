@@ -15,6 +15,8 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var pageScrollView: UIScrollView!
     @IBOutlet weak var pageContainer: UIView!
 
+    weak var presenter: PagesBarPresenter?
+    
     var offsetHasChanged: ((offset: CGFloat) -> Void)?
     var currentIndex = 0
     
@@ -108,12 +110,44 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        print("will begin dragging")
+        presenter?.onStartDragging()
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("did end dragging")
+        presenter?.onStopDragging()
+    }
+    
+    func doWillAppear(index: Int) {
+        orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
+        //orderedViewControllers[index].endAppearanceTransition()
+    }
+    
+    func doDidAppear(index: Int) {
+        //orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
+        orderedViewControllers[index].endAppearanceTransition()
+    }
+    
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        print("did end scrolling animation")
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        print("did end decelerating \(pageScrollView.contentOffset)")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pageScrollView.pagingEnabled=true;
         pageScrollView.delegate = self
         pageScrollView.backgroundColor = UIColor.blackColor()
         pageContainer.backgroundColor = UIColor.grayColor()
+    }
+    
+    override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
+        return false
     }
     
 }

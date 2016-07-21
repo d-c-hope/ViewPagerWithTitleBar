@@ -80,6 +80,7 @@ public class PagesBarController: UIViewController {
         calculatedLayoutInfo = CalculatedLayoutInfo()
         pagesBarView = PagesBarView(barController: self)
         presenter = PagesBarPresenter(view: pagesBarView!)
+        pagesSubsectionController.presenter = presenter
     }
     
     // All the labels and pages are positioned in here which will be called initially and then after

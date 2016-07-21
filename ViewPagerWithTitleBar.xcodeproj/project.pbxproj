@@ -186,6 +186,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13017C611D3ED8AE001648A6 /* Build configuration list for PBXNativeTarget "ViewPagerWithTitleBar" */;
 			buildPhases = (
+				13017C991D4154A4001648A6 /* ShellScript */,
 				13017C351D3ED8AE001648A6 /* Sources */,
 				13017C361D3ED8AE001648A6 /* Frameworks */,
 				13017C371D3ED8AE001648A6 /* Resources */,
@@ -305,6 +306,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		13017C991D4154A4001648A6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if which swiftlint >/dev/null; then\n#    swiftlint\n#else\n#    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		13017C351D3ED8AE001648A6 /* Sources */ = {

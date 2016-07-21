@@ -131,6 +131,12 @@ class CalculatedLayoutInfo {
         let calcIndex = Int( (offset+(boundsWidth/2)) / boundsWidth)
         return calcIndex;
     }
+    
+    func calcRelMovementFromPagePosition(currentIndex: Int, offset: CGFloat) -> CGFloat {
+        let boundsWidth = pagesLayoutInfo.boundsWidth
+        let current = CGFloat(currentIndex) * boundsWidth
+        return (offset - current) / boundsWidth
+    }
 
     func rectContainsLabelFrame(selLabelFrame: CGRect, visibleRect: CGRect) -> Bool {
         

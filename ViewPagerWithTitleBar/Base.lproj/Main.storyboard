@@ -98,7 +98,7 @@
         <!--PageB-->
         <scene sceneID="EQw-fy-MHv">
             <objects>
-                <viewController storyboardIdentifier="pageB" title="PageB" id="3jM-yo-cfN" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageB" title="PageB" id="3jM-yo-cfN" customClass="PageAViewController" customModule="ViewPagerWithTitleBar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JnX-bx-D2J"/>
                         <viewControllerLayoutGuide type="bottom" id="o8e-Xz-MVM"/>
@@ -116,7 +116,7 @@
         <!--PageC-->
         <scene sceneID="bA3-mJ-EJ1">
             <objects>
-                <viewController storyboardIdentifier="pageC" title="PageC" id="Fy8-LE-2Ry" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageC" title="PageC" id="Fy8-LE-2Ry" customClass="PageAViewController" customModule="ViewPagerWithTitleBar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ql8-Mh-rnM"/>
                         <viewControllerLayoutGuide type="bottom" id="eeq-A2-ulq"/>
@@ -134,7 +134,7 @@
         <!--PageD-->
         <scene sceneID="AwK-Ep-5Fp">
             <objects>
-                <viewController storyboardIdentifier="pageD" title="PageD" id="vl7-6F-ov6" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageD" title="PageD" id="vl7-6F-ov6" customClass="PageAViewController" customModule="ViewPagerWithTitleBar" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WEi-YN-By8"/>
                         <viewControllerLayoutGuide type="bottom" id="gyS-Df-PQP"/>

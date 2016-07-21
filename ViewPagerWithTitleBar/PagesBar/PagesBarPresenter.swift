@@ -11,6 +11,9 @@ protocol PresenterContract {
     func onSelectIndex(index: Int)
     func onPageScrolled(offset: CGFloat)
     func onLayoutDone()
+    func onStartDragging()
+    func onStopDragging()
+
 }
 
 protocol ViewContract {
@@ -21,6 +24,7 @@ protocol ViewContract {
     
     func calculateAllDimensions()
     func getInstantaneousPagePosition() -> Int
+    func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat
     func isLabelVisible(index: Int) -> Bool
     func layoutTitles()
     func layoutPages()
@@ -29,6 +33,10 @@ protocol ViewContract {
     func moveToPosition(index: Int, inTime: Double)
     func moveBarForOffset(offset: CGFloat)
     func scrollTitleBarTo(index: Int, inTime: Double)
+    
+    func setWillAppear(index: Int)
+    func setDidAppear(index: Int)
+    
 }
 
 class PagesBarPresenter : PresenterContract {
@@ -39,6 +47,7 @@ class PagesBarPresenter : PresenterContract {
         }
     }
     var selectedIndex = 3
+    var nextIndex = 0
     var numberOfItems = 0
     
     var pagesBarConfig: PagesBarConfig
@@ -46,6 +55,8 @@ class PagesBarPresenter : PresenterContract {
     var view: ViewContract
     
     var pagesBarEvents: PagesBarEvents?
+    
+    var isScrolling: Bool = false
     
     init(view:ViewContract) {
         self.view = view
@@ -106,15 +117,45 @@ class PagesBarPresenter : PresenterContract {
     }
     
     func onPageScrolled(offset: CGFloat) {
+        
         if (numberOfItems < 2) {return}
-        let calcIndex = view.getInstantaneousPagePosition()
+        //let calcIndex = view.getInstantaneousPagePosition()
+        
+        let relMovement = view.getInstantaneousPagePosition2(selectedIndex)
+        let next = relMovement > 0 ? selectedIndex+1 : selectedIndex - 1
+        if next != nextIndex && next != selectedIndex && next != -1 && next < numberOfItems && isScrolling {
+            nextIndex = next
+            self.view.setWillAppear(next)
+            print("got in here \(relMovement) \(next) \(selectedIndex)")
+        }
+        
+        var calcIndex = selectedIndex
+        //let absNumToMove = abs(numToMove)
+        if relMovement >= 0.5 {
+            //print("moved")
+            calcIndex = nextIndex
+        }
+        else if relMovement <= -0.5 {
+           // print("left moved")
+            //if (selectedIndex != 0) {
+                calcIndex = nextIndex
+            //}
+        }
+//        let numToMove = next>0 ? abs(next): abs(next) * -1
+//        if (numToMove != 0) {
+//            print("moved")
+//        }
+        //print("rel movement is \(relMovement)")
         
         view.moveBarForOffset(offset)
         view.setColorsAndFonts(calcIndex)
         
         if ( (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) ) {
+            isScrolling = false
             scrollTitleBarIfNeeded(calcIndex, inTime:0.2)
             selectedIndex = calcIndex
+            nextIndex = selectedIndex
+            self.view.setDidAppear(selectedIndex)
             pagesBarEvents?.onPageChanged(selectedIndex)
         }
     }
@@ -126,6 +167,17 @@ class PagesBarPresenter : PresenterContract {
         if (!view.isLabelVisible(index)) {
             view.scrollTitleBarTo(index, inTime: inTime)
         }
+    }
+    
+    func onStartDragging() {
+        isScrolling = true
+    }
+    
+    func onStopDragging() {
+        isScrolling = false
+        let relMovement = view.getInstantaneousPagePosition2(selectedIndex)
+        print("stop dragging \(relMovement)")
+        
     }
 }
 

@@ -68,6 +68,12 @@ class PagesBarView: ViewContract {
         return calcIndex
     }
     
+    func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat {
+        let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
+        let calcIndex = calculatedLayoutInfo.calcRelMovementFromPagePosition(currentIndex, offset: offset)
+        return calcIndex
+    }
+    
     func isLabelVisible(index: Int) -> Bool {
         let selLabelFrame = pagesBarCtl.labels[index].frame
         let visibleRect = pagesBarCtl.labelsScrollView.bounds
@@ -75,11 +81,14 @@ class PagesBarView: ViewContract {
     }
     
     func moveToPosition(index: Int, inTime: Double) {
+        self.pagesBarCtl.pagesSubsectionController.doWillAppear(index)
         UIView.animateWithDuration(inTime, animations: {
             self.pagesBarCtl.pagesSubsectionController.currentIndex = index
             self.pagesBarCtl.setSelectorPosition(index)
             self.pagesBarCtl.pagesSubsectionController.moveToPosition()
             self.setColorsAndFonts(index)
+            }, completion: { (finished: Bool) in
+                self.pagesBarCtl.pagesSubsectionController.doDidAppear(index)
         })
     }
     
@@ -108,4 +117,21 @@ class PagesBarView: ViewContract {
         }
         pagesBarCtl.labelsScrollView.backgroundColor = pagesBarCtl.pagesBarConfig?.barBackgroundColor
     }
+    
+//    func setWillAppear(index: Int)
+//    func setDidAppear(index: Int)
+    func setWillAppear(index: Int) {
+        self.pagesBarCtl.pagesSubsectionController.doWillAppear(index)
+    }
+    
+    func setDidAppear(index: Int) {
+        self.pagesBarCtl.pagesSubsectionController.doDidAppear(index)
+    }
+
 }
+
+
+
+
+
+
