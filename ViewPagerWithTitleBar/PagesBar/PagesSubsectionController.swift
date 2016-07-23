@@ -19,10 +19,11 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     
     var offsetHasChanged: ((offset: CGFloat) -> Void)?
     var currentIndex = 0
+
+    var didAppearType: LifecycleType = LifecycleType.OnSetViewControllers
     
     var orderedViewControllers: [UIViewController] = [UIViewController]()
     
-    var called = false
     var allConstraints = [NSLayoutConstraint]()
         
     func addViewController(controller: UIViewController, index: Int) {
@@ -109,54 +110,31 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
             callback(offset: scrollView.contentOffset.x)
         }
     }
-    
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        //print("will begin dragging")
-        presenter?.onStartDragging()
-    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        //print("did end dragging")
-        //presenter?.onStopDragging()
-    }
 
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        presenter?.onStopDragging(targetContentOffset.memory.x)
+        presenter?.onDraggingLetGo(targetContentOffset.memory.x)
     }
 
-
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        presenter!.onDraggingScrollingComplete()
+    }
 
     func doWillAppear(index: Int) {
         orderedViewControllers[index].beginAppearanceTransition(true, animated: true)
-        //orderedViewControllers[index].endAppearanceTransition()
     }
     
     func doDidAppear(index: Int) {
-        //orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
         orderedViewControllers[index].endAppearanceTransition()
     }
 
     func doWillDisappear(index: Int) {
         orderedViewControllers[index].beginAppearanceTransition(false, animated: true)
-        //orderedViewControllers[index].endAppearanceTransition()
     }
 
     func doDidDisappear(index: Int) {
-        //orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
         orderedViewControllers[index].endAppearanceTransition()
     }
-    
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        print("did end scrolling animation")
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print("did end decelerating \(pageScrollView.contentOffset)")
-        presenter!.onDraggingFinished()
-    }
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,7 +145,13 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     }
     
     override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
-        return false
+        if (didAppearType != LifecycleType.OnSetViewControllers) {
+            return true
+        }
+        else {
+            return false
+        }
+
     }
     
 }

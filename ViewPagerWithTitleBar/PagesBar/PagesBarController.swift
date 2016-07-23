@@ -9,6 +9,12 @@
 import UIKit
 
 
+enum LifecycleType{
+    case OnSetViewControllers // willAndDid called when all controllers added
+    case OnAppearOnScreen // willAndDid called as the edge of page becomes visible/disappears
+    case OnMovedToPage // will called as user stops dragging, did when scrolling completes on new page
+}
+
 public struct PagesBarConfig {
     
     internal var numOfItems: Int = 0

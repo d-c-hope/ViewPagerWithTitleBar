@@ -11,9 +11,8 @@ protocol PresenterContract {
     func onSelectIndex(index: Int)
     func onPageScrolled(offset: CGFloat)
     func onLayoutDone()
-    func onStartDragging()
-    func onStopDragging(targetOffset: CGFloat)
-    func onDraggingFinished()
+    func onDraggingLetGo(targetOffset: CGFloat)
+    func onDraggingScrollingComplete()
 
 }
 
@@ -24,10 +23,11 @@ protocol ViewContract {
     func clearPages()
     
     func calculateAllDimensions()
+
     func getInstantaneousPagePosition() -> Int
-    func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat
-    func getInstantaneousPagePosition3(offset: CGFloat) -> Int
-    func getVisiblePageIndices(currentIndex: Int) -> [Int]
+    func getInstantaneousPagePosition(offset: CGFloat) -> Int
+    func getVisiblePageIndices() -> [Int]
+
     func isLabelVisible(index: Int) -> Bool
     func layoutTitles()
     func layoutPages()
@@ -52,20 +52,16 @@ class PagesBarPresenter : PresenterContract {
         }
     }
     var selectedIndex = 3
-    var nextIndex = 0
     var numberOfItems = 0
+    var visiblePageIndices = [0]
+
+    var didAppearType: LifecycleType = LifecycleType.OnSetViewControllers
     
     var pagesBarConfig: PagesBarConfig
     
     var view: ViewContract
     
     var pagesBarEvents: PagesBarEvents?
-    
-    var isScrolling: Bool = false
-
-    var visiblePages = [0]
-
-    var didAppearType = 1
     
     init(view:ViewContract) {
         self.view = view
@@ -126,16 +122,16 @@ class PagesBarPresenter : PresenterContract {
     }
     
     func onPageScrolled(offset: CGFloat) {
-        
-        if (numberOfItems < 2) {return}
-        let visibleIndices = view.getVisiblePageIndices(0)
-        let existingVisibleIndices = Set(self.visiblePages)
-        let newVisiblePages = Set(visibleIndices)
-        let appearing = newVisiblePages.subtract(existingVisibleIndices)
-        let disappearing = existingVisibleIndices.subtract(newVisiblePages)
-        if (appearing.count > 0) {print("Appearing is \(appearing)")}
-        if (disappearing.count > 0) {print("Disappearing is \(disappearing)")}
-        if didAppearType == 0 {
+
+        func getVisibleAppearingAndDisappearingPages() -> ([Int], [Int], [Int]) {
+            let visiblePageIndices = Set(view.getVisiblePageIndices())
+            let existingVisibleIndices = Set(self.visiblePageIndices)
+            let appearing = visiblePageIndices.subtract(existingVisibleIndices)
+            let disappearing = existingVisibleIndices.subtract(visiblePageIndices)
+            return (Array(visiblePageIndices), Array(appearing), Array(disappearing))
+        }
+
+        func triggerPageLifecycleCalls(appearing: [Int], disappearing: [Int]) {
             for item in appearing {
                 self.view.setWillAppear(item)
                 self.view.setDidAppear(item)
@@ -145,93 +141,48 @@ class PagesBarPresenter : PresenterContract {
                 self.view.setDidDisappear(item)
             }
         }
-        self.visiblePages = visibleIndices
+
+        if (numberOfItems < 2) {return}
+
+        let (visibleIndices, appearing,disappearing) = getVisibleAppearingAndDisappearingPages()
+        if didAppearType == LifecycleType.OnAppearOnScreen {
+            triggerPageLifecycleCalls(appearing, disappearing: disappearing);
+        }
+        self.visiblePageIndices = visibleIndices
 
         let calcIndex = view.getInstantaneousPagePosition()
-
-        let relMovement = view.getInstantaneousPagePosition2(selectedIndex)
-//        let next = relMovement > 0 ? selectedIndex+1 : selectedIndex - 1
-//        if next != nextIndex && next != selectedIndex && next != -1 && next < numberOfItems && isScrolling {
-//            nextIndex = next
-//            self.view.setWillAppear(next)
-//            print("got in here \(relMovement) \(next) \(selectedIndex)")
-//        }
-        
-//        var calcIndex = selectedIndex
-//        //let absNumToMove = abs(numToMove)
-//        if relMovement >= 0.5 {
-//            //print("moved")
-//            calcIndex = nextIndex
-//        }
-//        else if relMovement <= -0.5 {
-//           // print("left moved")
-//            //if (selectedIndex != 0) {
-//                calcIndex = nextIndex
-//            //}
-//        }
-//        let numToMove = next>0 ? abs(next): abs(next) * -1
-//        if (numToMove != 0) {
-//            print("moved")
-//        }
-        //print("rel movement is \(relMovement)")
-        print("calcIndex is \(calcIndex)")
         view.moveBarForOffset(offset)
         view.setColorsAndFonts(calcIndex)
-        
         if ( (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) ) {
-            isScrolling = false
             scrollTitleBarIfNeeded(calcIndex, inTime:0.2)
-            //selectedIndex = calcIndex
-            nextIndex = selectedIndex
-//            self.view.setDidAppear(selectedIndex)
-//            pagesBarEvents?.onPageChanged(selectedIndex)
         }
     }
     
     func scrollTitleBarIfNeeded(index: Int, inTime: Double = 0) {
-        
         if (index >= controllersAndLabels.count) {return}
 
         if (!view.isLabelVisible(index)) {
             view.scrollTitleBarTo(index, inTime: inTime)
         }
     }
-    
-    func onStartDragging() {
-        isScrolling = true
-    }
-    
-    func onStopDragging(targetOfset: CGFloat) {
-        if didAppearType == 1 {
-            let calcIndex = view.getInstantaneousPagePosition3(targetOfset)
+
+    func onDraggingLetGo(targetOffset: CGFloat) {
+        if didAppearType == LifecycleType.OnMovedToPage {
+            let calcIndex = view.getInstantaneousPagePosition(targetOffset)
             self.view.setWillAppear(calcIndex)
             self.view.setWillDisappear(selectedIndex)
         }
-        isScrolling = false
-        let relMovement = view.getInstantaneousPagePosition2(selectedIndex)
-        print("stop dragging \(relMovement)")
-        
     }
-    
-    
-    func onDraggingFinished() {
-        let visibleIndices = view.getVisiblePageIndices(0)
-        if didAppearType == 1 {
+
+    func onDraggingScrollingComplete() {
+        let visibleIndices = view.getVisiblePageIndices()
+        if didAppearType == LifecycleType.OnMovedToPage {
             self.view.setDidAppear(visibleIndices[0])
             self.view.setDidDisappear(selectedIndex)
         }
         selectedIndex = visibleIndices[0]
         pagesBarEvents?.onPageChanged(selectedIndex)
 
-//        let calcIndex = view.getInstantaneousPagePosition()
-//        self.view.setDidAppear(calcIndex)
     }
 }
-
-
-
-
-
-
-
 

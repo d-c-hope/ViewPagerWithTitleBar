@@ -64,28 +64,24 @@ class PagesBarView: ViewContract {
     
     func getInstantaneousPagePosition() -> Int {
         let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
-        let calcIndex = calculatedLayoutInfo.calcIndexFromPagePosition(offset)
-        return calcIndex
+        return self.getInstantaneousPagePosition(offset)
+
     }
     
-    func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat {
+//    func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat {
+//
+//        let visibleRect = pagesBarCtl.pagesSubsectionController.pageScrollView.bounds
+//        let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
+//        let calcIndex = calculatedLayoutInfo.calcRelMovementFromPagePosition(currentIndex, offset: offset)
+//        return calcIndex
+//    }
 
-        let visibleRect = pagesBarCtl.pagesSubsectionController.pageScrollView.bounds
-        //print("Visiable indices are \(calculatedLayoutInfo.calculateVisiblePages(visibleRect))")
-
-        let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
-        let calcIndex = calculatedLayoutInfo.calcRelMovementFromPagePosition(currentIndex, offset: offset)
-        return calcIndex
-    }
-
-    func getInstantaneousPagePosition3(offset: CGFloat) -> Int {
-        //let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
+    func getInstantaneousPagePosition(offset: CGFloat) -> Int {
         let calcIndex = calculatedLayoutInfo.calcIndexFromPagePosition(offset)
         return calcIndex
     }
 
-    func getVisiblePageIndices(currentIndex: Int) -> [Int] {
-
+    func getVisiblePageIndices() -> [Int] {
         let visibleRect = pagesBarCtl.pagesSubsectionController.pageScrollView.bounds
         let visibleIndices = calculatedLayoutInfo.calculateVisiblePages(visibleRect)
 
@@ -137,9 +133,7 @@ class PagesBarView: ViewContract {
         }
         pagesBarCtl.labelsScrollView.backgroundColor = pagesBarCtl.pagesBarConfig?.barBackgroundColor
     }
-    
-//    func setWillAppear(index: Int)
-//    func setDidAppear(index: Int)
+
     func setWillAppear(index: Int) {
         self.pagesBarCtl.pagesSubsectionController.doWillAppear(index)
     }
