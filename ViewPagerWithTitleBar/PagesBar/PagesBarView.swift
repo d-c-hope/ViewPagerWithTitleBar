@@ -69,11 +69,31 @@ class PagesBarView: ViewContract {
     }
     
     func getInstantaneousPagePosition2(currentIndex: Int) -> CGFloat {
+
+        let visibleRect = pagesBarCtl.pagesSubsectionController.pageScrollView.bounds
+        //print("Visiable indices are \(calculatedLayoutInfo.calculateVisiblePages(visibleRect))")
+
         let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
         let calcIndex = calculatedLayoutInfo.calcRelMovementFromPagePosition(currentIndex, offset: offset)
         return calcIndex
     }
-    
+
+    func getInstantaneousPagePosition3(offset: CGFloat) -> Int {
+        //let offset = pagesBarCtl.pagesSubsectionController.pageScrollView.contentOffset.x
+        let calcIndex = calculatedLayoutInfo.calcIndexFromPagePosition(offset)
+        return calcIndex
+    }
+
+    func getVisiblePageIndices(currentIndex: Int) -> [Int] {
+
+        let visibleRect = pagesBarCtl.pagesSubsectionController.pageScrollView.bounds
+        let visibleIndices = calculatedLayoutInfo.calculateVisiblePages(visibleRect)
+
+        return visibleIndices
+    }
+
+
+
     func isLabelVisible(index: Int) -> Bool {
         let selLabelFrame = pagesBarCtl.labels[index].frame
         let visibleRect = pagesBarCtl.labelsScrollView.bounds
@@ -127,6 +147,15 @@ class PagesBarView: ViewContract {
     func setDidAppear(index: Int) {
         self.pagesBarCtl.pagesSubsectionController.doDidAppear(index)
     }
+
+    func setWillDisappear(index: Int) {
+        self.pagesBarCtl.pagesSubsectionController.doWillDisappear(index)
+    }
+
+    func setDidDisappear(index: Int) {
+        self.pagesBarCtl.pagesSubsectionController.doDidDisappear(index)
+    }
+
 
 }
 

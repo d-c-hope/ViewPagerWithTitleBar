@@ -111,21 +111,38 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        print("will begin dragging")
+        //print("will begin dragging")
         presenter?.onStartDragging()
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("did end dragging")
-        presenter?.onStopDragging()
+        //print("did end dragging")
+        //presenter?.onStopDragging()
     }
-    
+
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        presenter?.onStopDragging(targetContentOffset.memory.x)
+    }
+
+
+
     func doWillAppear(index: Int) {
-        orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
+        orderedViewControllers[index].beginAppearanceTransition(true, animated: true)
         //orderedViewControllers[index].endAppearanceTransition()
     }
     
     func doDidAppear(index: Int) {
+        //orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
+        orderedViewControllers[index].endAppearanceTransition()
+    }
+
+    func doWillDisappear(index: Int) {
+        orderedViewControllers[index].beginAppearanceTransition(false, animated: true)
+        //orderedViewControllers[index].endAppearanceTransition()
+    }
+
+    func doDidDisappear(index: Int) {
         //orderedViewControllers[index].beginAppearanceTransition(true, animated: false)
         orderedViewControllers[index].endAppearanceTransition()
     }
@@ -136,8 +153,11 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         print("did end decelerating \(pageScrollView.contentOffset)")
+        presenter!.onDraggingFinished()
     }
-    
+
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageScrollView.pagingEnabled=true;

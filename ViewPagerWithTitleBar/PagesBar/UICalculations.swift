@@ -171,6 +171,22 @@ class CalculatedLayoutInfo {
         }
     }
 
+    func calculateVisiblePages(visibleRect: CGRect) -> [Int] {
+        //print("visible rect is \(visibleRect)")
+        var visibleIndices = [Int]()
+        var pageWidth = self.pagesLayoutInfo.boundsWidth
+        for i in 0...self.pagerConstants.numOfItems {
+            let minX = CGFloat(i) * pageWidth
+            let maxX = (CGFloat(i+1) * pageWidth) - 1
+            if visibleRect.contains(CGPoint(x: minX, y: visibleRect.minY)) ||
+                    visibleRect.contains(CGPoint(x: maxX, y: visibleRect.minY)) {
+                visibleIndices.append(i)
+            }
+        }
+
+        return visibleIndices
+    }
+
 }
 
 
