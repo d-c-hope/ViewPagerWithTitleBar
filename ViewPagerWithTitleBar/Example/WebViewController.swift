@@ -29,6 +29,8 @@ class WebViewController: UIViewController, WKNavigationDelegate, UIScrollViewDel
 //    }
     
     var contentOffsetCallback: ((contentOffset: CGFloat, scrollView: UIScrollView) -> Void)?
+    var hasBegunScrolling: ((scrollView: UIScrollView) -> Void)?
+    var hasEndedScrolling: ((scrollView: UIScrollView) -> Void)?
     
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -36,6 +38,21 @@ class WebViewController: UIViewController, WKNavigationDelegate, UIScrollViewDel
         //print("webview scrolling \(scrollView.contentOffset)")
         contentOffsetCallback?(contentOffset: contentOffset.y, scrollView: scrollView)
     }
+
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        hasBegunScrolling?(scrollView: scrollView)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate == false {
+            hasEndedScrolling?(scrollView: scrollView)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        hasEndedScrolling?(scrollView: scrollView)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +91,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, UIScrollViewDel
 
 
 
-        if let url = NSURL(string: "http://bbc.co.uk") {
+        if let url = NSURL(string: url) {  //"http://bbc.co.uk") {
             let req = NSURLRequest(URL: url)
             webView?.loadRequest(req)
         }
