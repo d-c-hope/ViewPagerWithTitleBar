@@ -44,10 +44,37 @@ class DCHUtils {
         return controllers
     }
     
+    func makeWebControllers() -> [(String, UIViewController)] {
+//        let controllers :[(String, UIViewController)] =
+//            [("WebA", newWebViewController()),
+//             ("WebB" , newWebViewController()),
+//             ("WebC", newWebViewController()),
+//             
+//        ]
+        
+        var controllers = [(String, UIViewController)]()
+        
+        for item in [("A", "http://premsc.365dm.com/match-info/362376"),
+                     ("B", "http://premsc.365dm.com/squads/362376"),
+                     ("C", "http://premsc.365dm.com/report/362376/10507099")] {
+            let controller = newWebViewController() as! WebViewController
+            controller.name = "Web\(item.0)"
+            controller.url = item.1
+            controllers.append((controller.name, controller))
+        }
+        
+        return controllers
+    }
+    
     
     private func newColoredViewController(name: String) -> UIViewController {
         return UIStoryboard(name: "Main", bundle: nil) .
             instantiateViewControllerWithIdentifier("page\(name)")
+    }
+    
+    private func newWebViewController() -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil) .
+            instantiateViewControllerWithIdentifier("WebA")
     }
     
     func delay(delay: Double, closure: ()->()) {

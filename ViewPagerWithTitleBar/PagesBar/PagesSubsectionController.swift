@@ -145,7 +145,7 @@ class PagesSubsectionController: UIViewController, UIScrollViewDelegate {
     }
     
     override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
-        if (didAppearType != LifecycleType.OnSetViewControllers) {
+        if (didAppearType == LifecycleType.OnSetViewControllers) {
             return true
         }
         else {

@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
         }
         
         // Some demo items
-        let viewControllersAndLabels = DCHUtils().makeControllers5()
+        let viewControllersAndLabels = DCHUtils().makeWebControllers()
         pagesBarController.pagesBarConfig = pagesBarConfig
         pagesBarController.setViewControllersAndLabels(viewControllersAndLabels)
         pagesBarController.pagesBarEvents = PageChanged()

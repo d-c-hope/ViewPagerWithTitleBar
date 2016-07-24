@@ -24,6 +24,8 @@
 		13017C8E1D40160B001648A6 /* PageAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8B1D40160B001648A6 /* PageAViewController.swift */; };
 		13017C8F1D40160B001648A6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C8C1D40160B001648A6 /* ViewController.swift */; };
 		13017C911D401BEF001648A6 /* UICalculationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13017C901D401BEF001648A6 /* UICalculationsTests.swift */; };
+		135074FB1D44A66A0094BE59 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135074FA1D44A66A0094BE59 /* WebViewController.swift */; };
+		135074FD1D44C5F30094BE59 /* MainWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135074FC1D44C5F30094BE59 /* MainWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		13017C8B1D40160B001648A6 /* PageAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageAViewController.swift; sourceTree = "<group>"; };
 		13017C8C1D40160B001648A6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		13017C901D401BEF001648A6 /* UICalculationsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UICalculationsTests.swift; path = PagesBar/UICalculationsTests.swift; sourceTree = "<group>"; };
+		135074FA1D44A66A0094BE59 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		135074FC1D44C5F30094BE59 /* MainWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,8 @@
 				13017C8B1D40160B001648A6 /* PageAViewController.swift */,
 				13017C8C1D40160B001648A6 /* ViewController.swift */,
 				13017C881D40153D001648A6 /* DCHUtils.swift */,
+				135074FA1D44A66A0094BE59 /* WebViewController.swift */,
+				135074FC1D44C5F30094BE59 /* MainWebViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -328,7 +334,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				135074FD1D44C5F30094BE59 /* MainWebViewController.swift in Sources */,
 				13017C8D1D40160B001648A6 /* MainViewController.swift in Sources */,
+				135074FB1D44A66A0094BE59 /* WebViewController.swift in Sources */,
 				13017C841D3ED974001648A6 /* UICalculations.swift in Sources */,
 				13017C831D3ED974001648A6 /* PagesBarPresenter.swift in Sources */,
 				13017C891D40153D001648A6 /* DCHUtils.swift in Sources */,

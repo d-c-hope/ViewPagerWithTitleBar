@@ -97,14 +97,12 @@ class PagesBarView: ViewContract {
     }
     
     func moveToPosition(index: Int, inTime: Double) {
-        self.pagesBarCtl.pagesSubsectionController.doWillAppear(index)
         UIView.animateWithDuration(inTime, animations: {
             self.pagesBarCtl.pagesSubsectionController.currentIndex = index
             self.pagesBarCtl.setSelectorPosition(index)
             self.pagesBarCtl.pagesSubsectionController.moveToPosition()
             self.setColorsAndFonts(index)
             }, completion: { (finished: Bool) in
-                self.pagesBarCtl.pagesSubsectionController.doDidAppear(index)
         })
     }
     
