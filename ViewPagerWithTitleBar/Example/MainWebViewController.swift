@@ -32,7 +32,7 @@ class MainWebViewController: UIViewController {
             var outer: MainWebViewController? = nil
             private func onPageChanged(index: Int) {
                 print("page changed to \(index)")
-                outer!.getInitials()
+                outer!.getInitials2()
             }
         }
         
@@ -75,7 +75,7 @@ class MainWebViewController: UIViewController {
         // header frame dependes on the offset but also where  the frame started on
         // page load. We want to move relatively when we scroll, not absolutely to scroll position
         let potentialFrameY = -contentOffset - -self.startingY
-        
+        print(startingY)
         //var frameY : CGFloat = 0
         var frameY = checkY(potentialFrameY)
         
@@ -98,20 +98,23 @@ class MainWebViewController: UIViewController {
         // to a screen scrolled down significantly, so it hides on any scrolling
         let existing = self.headerView.frame.minY
         let frameChange = existing - frameY
+        let height = self.originalContainerFrame.height-frameY+startingY
         if (frameChange > 20) {
             UIView.animateWithDuration(0.2, animations: {
-                self.updateFrame(frameY)
+                self.updateFrame(frameY, hei:height)
             })
         }
         else {
-            updateFrame(frameY)
+            
+            updateFrame(frameY, hei:height)
         }
         
 
     }
 
     
-    func updateFrame(frameY: CGFloat) {
+    func updateFrame(frameY: CGFloat, hei: CGFloat) {
+        print("\(frameY)   \(self.originalContainerFrame.height)")
         let newHeaderFrame = CGRect(x: 0,
                                     y: frameY,
                                     width:self.originalHeaderFrame.width,
@@ -121,7 +124,7 @@ class MainWebViewController: UIViewController {
         let newContainerFrame = CGRect(x: 0,
                                        y: frameY + self.originalHeaderFrame.height,
                                        width:self.originalContainerFrame.width,
-                                       height:self.originalContainerFrame.height-frameY)
+                                       height:hei)
         self.containerView.frame = newContainerFrame
 
     }
@@ -137,10 +140,6 @@ class MainWebViewController: UIViewController {
             return 0;
         }
     }
-
-
-
-
     
     
     func getInitials() {
@@ -148,7 +147,13 @@ class MainWebViewController: UIViewController {
         originalContainerFrame = containerView.frame
         startingY = self.originalHeaderFrame.minY
     }
-    
+
+    func getInitials2() {
+        let originalHeaderFrame = headerView.frame
+        let originalContainerFrame = containerView.frame
+        startingY = originalHeaderFrame.minY
+    }
+
     
     override func viewDidLayoutSubviews() {
         getInitials()
