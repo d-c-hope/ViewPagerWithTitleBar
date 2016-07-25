@@ -14,9 +14,7 @@ class MainWebViewController: UIViewController {
     var pagesBarController: PagesBarController!
     
     var originalHeaderFrame = CGRectZero
-    var viewStartHeaderFrame = CGRectZero
     var originalContainerFrame = CGRectZero
-    var viewStartContainerFrame = CGRectZero
     var startingY : CGFloat = 0
     
     var isScrolling = false
@@ -60,8 +58,6 @@ class MainWebViewController: UIViewController {
             webController.hasBegunScrolling = { (scrollView: UIScrollView) in
                 print("has begun scrolling")
                 self.isScrolling = true
-                //self.originalHeaderFrame = self.headerView.frame
-                //self.startingY = self.originalHeaderFrame.minY
             }
             
             webController.hasEndedScrolling = { (scrollView: UIScrollView) in
@@ -77,8 +73,6 @@ class MainWebViewController: UIViewController {
         // header frame dependes on the offset but also where  the frame started on
         // page load. We want to move relatively when we scroll, not absolutely to scroll position
         let potentialFrameY = -contentOffset - -self.startingY
-//        print(startingY)
-        //var frameY : CGFloat = 0
         var frameY = checkY(potentialFrameY)
         
         // when at the top but not with a full header - usually when changing tabs to
@@ -87,24 +81,17 @@ class MainWebViewController: UIViewController {
             self.startingY -= contentOffset
             if (self.startingY < -80) {self.startingY = -80}
             if (self.startingY > 0) {self.startingY = 0}
-            print("startingY is \(self.startingY)")
             frameY += contentOffset
         }
         
         
-        //print("before frameY is \(potentialFrameY) offset is \(contentOffset) starting is \(startingY)")
         frameY = checkY(potentialFrameY)
-
-        //print("frameY is \(frameY) offset is \(contentOffset)")
         
         // if its a big change animate - this is normally when the menu is visible but you go
         // to a screen scrolled down significantly, so it hides on any scrolling
         let existing = self.headerView.frame.minY
         let frameChange = existing - frameY
-        //print("self original \(self.viewStartHeaderFrame.height) frame change \(frameChange)")
         let height  = self.originalContainerFrame.height - frameY //- startingY
-        let height2 = self.viewStartHeaderFrame.height   - frameY + startingY
-        print("fy \(frameY)  h1 \(height) so \(startingY)  \(originalContainerFrame.height)")
         if (frameChange > 20) {
             UIView.animateWithDuration(0.2, animations: {
                 self.updateFrame(frameY, hei:height)
@@ -120,7 +107,6 @@ class MainWebViewController: UIViewController {
 
     
     func updateFrame(frameY: CGFloat, hei: CGFloat) {
-        print("\(frameY)   \(hei)")
         let newHeaderFrame = CGRect(x: 0,
                                     y: frameY,
                                     width:self.originalHeaderFrame.width,
@@ -150,14 +136,12 @@ class MainWebViewController: UIViewController {
     
     func getInitials() {
         originalHeaderFrame = headerView.frame
-        viewStartHeaderFrame = headerView.frame
         originalContainerFrame = containerView.frame
         startingY = self.originalHeaderFrame.minY
     }
 
     func getInitials2() {
-        viewStartHeaderFrame = headerView.frame
-        viewStartContainerFrame = containerView.frame
+        let viewStartHeaderFrame = headerView.frame
         startingY = viewStartHeaderFrame.minY
     }
 
