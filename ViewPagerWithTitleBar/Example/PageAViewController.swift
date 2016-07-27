@@ -11,7 +11,7 @@ class PageAViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
@@ -31,16 +31,5 @@ class PageAViewController: UIViewController {
         super.viewDidDisappear(animated)
         print("view did disappear")
     }
-
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
 }

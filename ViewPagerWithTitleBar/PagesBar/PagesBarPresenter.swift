@@ -21,7 +21,7 @@ protocol ViewContract {
     func addPage(page: UIViewController, index: Int)
     func clearTitles()
     func clearPages()
-    
+
     func calculateAllDimensions()
 
     func getInstantaneousPagePosition() -> Int
@@ -32,22 +32,23 @@ protocol ViewContract {
     func layoutTitles()
     func layoutPages()
     func setColorsAndFonts(selectedIndex: Int)
-    
+
     func moveToPosition(index: Int, inTime: Double)
     func moveBarForOffset(offset: CGFloat)
     func scrollTitleBarTo(index: Int, inTime: Double)
-    
+
     func setWillAppear(index: Int)
     func setDidAppear(index: Int)
     func setWillDisappear(index: Int)
     func setDidDisappear(index: Int)
-    
+
 }
 
-class PagesBarPresenter : PresenterContract {
-    
-    var titles : [String] = []
-    var controllersAndLabels :[(String, UIViewController)] = [(String, UIViewController)]() { didSet {
+class PagesBarPresenter: PresenterContract {
+
+    var titles: [String] = []
+    var controllersAndLabels: [(String, UIViewController)] = [(String, UIViewController)]() {
+        didSet {
             numberOfItems = controllersAndLabels.count
         }
     }
@@ -56,30 +57,30 @@ class PagesBarPresenter : PresenterContract {
     var visiblePageIndices = [0]
 
     var didAppearType: LifecycleType = LifecycleType.OnSetViewControllers
-    
+
     var pagesBarConfig: PagesBarConfig
-    
+
     var view: ViewContract
-    
+
     var pagesBarEvents: PagesBarEvents?
-    
-    init(view:ViewContract) {
+
+    init(view: ViewContract) {
         self.view = view
         pagesBarConfig = PagesBarConfig()
     }
-    
+
     // Call this to set the view controllers and and add them to the view hierarchy
     func setViewControllersAndLabels(controllersAndLabels: [(String, UIViewController)]) {
         setViewControllersAndLabels(controllersAndLabels, initialIndex: 0)
     }
-    
+
     func setViewControllersAndLabels(controllersAndLabels: [(String, UIViewController)],
                                      initialIndex: Int) {
         selectedIndex = initialIndex
         self.controllersAndLabels = controllersAndLabels
         let titles = controllersAndLabels.map() { title, ctl in return title }
         let pageControllers = controllersAndLabels.map() { title, ctl in return ctl }
-        
+
         clearAll()
         addTitles(titles)
         addPages(pageControllers)
@@ -89,14 +90,14 @@ class PagesBarPresenter : PresenterContract {
         view.clearTitles()
         view.clearPages()
     }
-    
+
     private func addTitles(titles: [String]) {
         for (i, title) in titles.enumerate() {
             self.titles.append(title)
             view.addTitle(title, index: i)
         }
     }
-    
+
     private func addPages(pages: [UIViewController]) {
         for (i, page) in pages.enumerate() {
             view.addPage(page, index: i)
@@ -104,13 +105,13 @@ class PagesBarPresenter : PresenterContract {
     }
 
     func onSelectIndex(index: Int) {
-        if (index != selectedIndex) {
+        if index != selectedIndex {
             selectedIndex = index
             view.moveToPosition(index, inTime: 0.2)
             pagesBarEvents?.onPageChanged(index)
         }
     }
-    
+
     func onLayoutDone() {
         if controllersAndLabels.count == 0 {return}
         // now we can layout the subview with our dimensions decided
@@ -120,7 +121,7 @@ class PagesBarPresenter : PresenterContract {
         view.moveToPosition(selectedIndex, inTime: 0)
         scrollTitleBarIfNeeded(selectedIndex)
     }
-    
+
     func onPageScrolled(offset: CGFloat) {
 
         func getVisibleAppearingAndDisappearingPages() -> ([Int], [Int], [Int]) {
@@ -142,26 +143,30 @@ class PagesBarPresenter : PresenterContract {
             }
         }
 
-        if (numberOfItems < 2) {return}
+        if numberOfItems < 2 {
+            return
+        }
 
-        let (visibleIndices, appearing,disappearing) = getVisibleAppearingAndDisappearingPages()
+        let (visibleIndices, appearing, disappearing) = getVisibleAppearingAndDisappearingPages()
         if didAppearType == LifecycleType.OnAppearOnScreen {
-            triggerPageLifecycleCalls(appearing, disappearing: disappearing);
+            triggerPageLifecycleCalls(appearing, disappearing: disappearing)
         }
         self.visiblePageIndices = visibleIndices
 
         let calcIndex = view.getInstantaneousPagePosition()
         view.moveBarForOffset(offset)
         view.setColorsAndFonts(calcIndex)
-        if ( (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) ) {
+        if (calcIndex != selectedIndex) && (selectedIndex < numberOfItems) {
             scrollTitleBarIfNeeded(calcIndex, inTime:0.2)
         }
     }
-    
-    func scrollTitleBarIfNeeded(index: Int, inTime: Double = 0) {
-        if (index >= controllersAndLabels.count) {return}
 
-        if (!view.isLabelVisible(index)) {
+    func scrollTitleBarIfNeeded(index: Int, inTime: Double = 0) {
+        if index >= controllersAndLabels.count {
+            return
+        }
+
+        if !view.isLabelVisible(index) {
             view.scrollTitleBarTo(index, inTime: inTime)
         }
     }
@@ -185,4 +190,3 @@ class PagesBarPresenter : PresenterContract {
 
     }
 }
-
